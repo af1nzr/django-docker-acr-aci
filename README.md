@@ -80,24 +80,20 @@ Whenever code is pushed to the `main` branch:
 
 ### Build Image
 ```bash
+
 docker build -t dockerdjangoapp .
 
 Run Locally
-bash
-Copy
-Edit
 docker run -p 8000:8000 dockerdjangoapp
+
 Tag for ACR
-bash
-Copy
-Edit
 docker tag dockerdjangoapp <acr-name>.azurecr.io/dockerdjangoapp:latest
+
 Push to ACR
-bash
-Copy
-Edit
 docker push <acr-name>.azurecr.io/dockerdjangoapp:latest
+
 🔄 GitHub Actions Workflow Overview
+
 Workflow file: .github/workflows/docker-acr-aci.yml
 
 Triggers on:
@@ -107,13 +103,13 @@ Triggers on:
       - main
 
 Actions:
-Log in to Azure
+    Log in to Azure
 
-Build Docker image
+    Build Docker image
 
-Push image to ACR
+    Push image to ACR
 
-Deploy to ACI using Azure CLI
+    Deploy to ACI using Azure CLI
 
 📝 License
 This project is licensed under the MIT License.
