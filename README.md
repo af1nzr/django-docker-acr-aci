@@ -23,7 +23,7 @@ This project is a **Django-based web application** structured using best practic
 ---
 
 ## 📁 Project Structure
-
+<pre>
 ├── core/ # Django project settings
 │ ├── init.py
 │ ├── asgi.py
@@ -48,7 +48,7 @@ This project is a **Django-based web application** structured using best practic
 └── .github/
 └── workflows/
 └── docker-acr-aci.yml # GitHub Actions workflow
-
+</pre>
 
 ---
 
