@@ -1,0 +1,19 @@
+django-simple-app/
+├── Dockerfile
+├── requirements.txt
+├── manage.py
+├── core/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+│   └── asgi.py
+├── main/
+│   ├── __init__.py
+│   ├── views.py
+│   ├── urls.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations/
+│   │   └── __init__.py
+│   └── models.py

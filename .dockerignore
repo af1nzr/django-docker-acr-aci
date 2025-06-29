@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# Python
+*.py[cod]
+__pycache__
+
+# Virtual Environment
+venv/
+env/
+.env
+
+# IDE
+.idea
+.vscode
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Local development
+db.sqlite3
+media/
+static/
+
+# Documentation
+README.md

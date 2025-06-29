@@ -1,0 +1,51 @@
+name: Django App - Build & Deploy to Azure ACI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Set Docker Image Name
+        id: vars
+        run: |
+          echo "IMAGE_NAME=${{ secrets.ACR_NAME }}.azurecr.io/dockerdjangoapp:latest" >> $GITHUB_ENV
+
+      - name: Build Docker Image
+        run: |
+          docker build -t $IMAGE_NAME .
+
+      - name: Login to Azure Container Registry
+        run: |
+          az acr login --name ${{ secrets.ACR_NAME }}
+
+      - name: Push Docker Image to ACR
+        run: |
+          docker push $IMAGE_NAME
+
+      - name: Deploy to Azure Container Instance
+        run: |
+          az container create \
+            --resource-group ${{ secrets.ACI_RG }} \
+            --name ${{ secrets.ACI_NAME }} \
+            --image $IMAGE_NAME \
+            --registry-login-server ${{ secrets.ACR_NAME }}.azurecr.io \
+            --dns-name-label ${{ secrets.ACI_DNS_NAME_LABEL }} \
+            --ports 8000 \
+            --cpu 1 \
+            --memory 1.5 \
+            --location ${{ secrets.ACI_REGION }} \
+            --restart-policy Always \
+            --query ipAddress.fqdn
